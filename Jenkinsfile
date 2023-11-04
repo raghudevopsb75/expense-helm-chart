@@ -19,7 +19,12 @@ pipeline {
          dir('APP') {
            git branch: 'main', url: "https://github.com/raghudevopsb75/${APP_NAME}"
          }
-        sh 'helm upgrade -i ${APP_NAME} . -f APP/helm/${ENV}.yaml --set appVersion=${VERSION}'
+        dir('HELM') {
+          git branch: 'main', url: "https://github.com/raghudevopsb75/expense-helm-chart"
+          env
+          sh 'helm upgrade -i ${APP_NAME} . -f APP/helm/${ENV}.yaml --set appVersion=${VERSION}'
+        }
+
       }
     }
 
