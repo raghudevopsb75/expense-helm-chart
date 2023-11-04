@@ -21,8 +21,7 @@ pipeline {
          }
         dir('HELM') {
           git branch: 'main', url: "https://github.com/raghudevopsb75/expense-helm-chart"
-          sh 'env'
-          sh 'helm upgrade -i ${APP_NAME} . -f APP/helm/${ENV}.yaml --set appVersion=${VERSION}'
+          sh 'helm upgrade -i ${APP_NAME} . -f ${WORKSPACE}/APP/helm/${ENV}.yaml --set appVersion=${VERSION}'
         }
 
       }
